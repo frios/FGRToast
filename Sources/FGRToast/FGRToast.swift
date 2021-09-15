@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct Toast: View {
+public struct Toast: View {
     
-    @Binding var show: Bool
+    @Binding public var show: Bool
 
-    var message: String
-    var duration: Double = 2.0
-    var fontSize: Font = .title
-    var textColor: Color = Color(.secondaryLabel)
-    var backgroundColor : Color = Color (.clear)
-    var encapsulate: Bool = false
+    public var message: String
+    public var duration: Double = 2.0
+    public var fontSize: Font = .title
+    public var textColor: Color = Color(.secondaryLabel)
+    public var backgroundColor : Color = Color (.clear)
+    public var encapsulate: Bool = false
     
-    var body: some View {
+    public var body: some View {
         Text(message)
             .font(fontSize)
             .foregroundColor(textColor)
