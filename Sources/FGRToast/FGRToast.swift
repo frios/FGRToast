@@ -52,8 +52,8 @@ public extension View {
     }
 }
 
-struct Toast_Previews: PreviewProvider {
-    static var previews: some View {
+public struct Toast_Previews: PreviewProvider {
+    public static var previews: some View {
         Toast(show: .constant(true), message: "hello world")
             
     }
