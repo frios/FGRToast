@@ -1,3 +1,60 @@
-struct FGRToast {
-    var text = "Hello, World!"
+//
+//  Toast.swift
+//  LocationApp
+//
+//  Created by Ferdinand Rios on 9/15/21.
+//
+
+import SwiftUI
+
+struct Toast: View {
+    
+    @Binding var show: Bool
+
+    var message: String
+    var duration: Double = 2.0
+    var fontSize: Font = .title
+    var textColor: Color = Color(.secondaryLabel)
+    var backgroundColor : Color = Color (.clear)
+    var encapsulate: Bool = false
+    
+    var body: some View {
+        Text(message)
+            .font(fontSize)
+            .foregroundColor(textColor)
+            .padding(.horizontal)
+            .padding(.vertical, 2.0)
+            .background(backgroundColor)
+            .if(encapsulate, transform: { view in
+                view.clipShape(Capsule())
+            })
+            .onAppear(){
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                    show = false
+                }
+            }
+    }
+
+}
+
+extension View {
+    /// Applies the given transform if the given condition evaluates to `true`.
+    /// - Parameters:
+    ///   - condition: The condition to evaluate.
+    ///   - transform: The transform to apply to the source `View`.
+    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
+
+struct Toast_Previews: PreviewProvider {
+    static var previews: some View {
+        Toast(show: .constant(true), message: "hello world")
+            
+    }
 }
