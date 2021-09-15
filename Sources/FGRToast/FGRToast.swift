@@ -9,14 +9,32 @@ import SwiftUI
 
 public struct Toast: View {
     
-    @Binding public var show: Bool
+    @Binding var show: Bool
 
-    public var message: String
-    public var duration: Double = 2.0
-    public var fontSize: Font = .title
-    public var textColor: Color = Color(.secondaryLabel)
-    public var backgroundColor : Color = Color (.clear)
-    public var encapsulate: Bool = false
+    var message: String = ""
+    var duration: Double = 2.0
+    var fontSize: Font = .title
+    var textColor: Color = Color(.secondaryLabel)
+    var backgroundColor : Color = Color (.clear)
+    var encapsulate: Bool = false
+    
+    public init(show: Binding<Bool>,
+                message: String,
+                duration: Double = 2.0,
+                fontSize: Font = .title,
+                textColor: Color = Color(.secondaryLabel),
+                backgroundColor: Color = Color (.clear),
+                encapsulate: Bool = false) {
+        
+        self._show = show
+        self.message = message
+        self.duration = duration
+        self.fontSize = fontSize
+        self.textColor = textColor
+        self.backgroundColor = backgroundColor
+        self.encapsulate = encapsulate
+    }
+    
     
     public var body: some View {
         Text(message)
@@ -34,6 +52,8 @@ public struct Toast: View {
                 }
             }
     }
+    
+    
 
 }
 
@@ -52,9 +72,8 @@ public extension View {
     }
 }
 
-public struct Toast_Previews: PreviewProvider {
-    public static var previews: some View {
-        Toast(show: .constant(true), message: "hello world")
-            
-    }
-}
+//public struct Toast_Previews: PreviewProvider {
+//    public static var previews: some View {
+//        Toast()
+//    }
+//}
