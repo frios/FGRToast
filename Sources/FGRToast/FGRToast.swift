@@ -52,9 +52,6 @@ public struct Toast: View {
                 }
             }
     }
-    
-    
-
 }
 
 public extension View {
