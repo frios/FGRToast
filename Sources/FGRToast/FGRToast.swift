@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct Toast: View {
+public struct Toast<Content: Shape>: View {
     
     @Binding var show: Bool
 
@@ -17,6 +17,7 @@ public struct Toast: View {
     var textColor: Color = Color(.secondaryLabel)
     var backgroundColor : Color = Color (.clear)
     var encapsulate: Bool = false
+    var shape: Content
     
     public init(show: Binding<Bool>,
                 message: String,
@@ -24,7 +25,8 @@ public struct Toast: View {
                 fontSize: Font = .title,
                 textColor: Color = Color(.secondaryLabel),
                 backgroundColor: Color = Color (.clear),
-                encapsulate: Bool = false) {
+                encapsulate: Bool = false,
+                shape: Content) {
         
         self._show = show
         self.message = message
@@ -33,11 +35,13 @@ public struct Toast: View {
         self.textColor = textColor
         self.backgroundColor = backgroundColor
         self.encapsulate = encapsulate
+        self.shape = shape
     }
     
     
     public var body: some View {
         Text(message)
+            .accessibility(label: Text(message))
             .font(fontSize)
             .foregroundColor(textColor)
             .padding(.horizontal)
