@@ -48,7 +48,7 @@ public struct Toast<Content: Shape>: View {
             .padding(.vertical, 2.0)
             .background(backgroundColor)
             .if(encapsulate, transform: { view in
-                view.clipShape(Capsule())
+                view.clipShape(shape)
             })
             .onAppear(){
                 DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
